@@ -4,5 +4,10 @@ export interface Article {
     subtitle?: string,
     category: string,
     abstract: string,
-    body?: string
- }
+    body?: string,
+    update_date: Date,
+    image_data?: HTMLImageElement,
+    image_media_type?: HTMLImageElement,
+    thumbnail_image?: HTMLImageElement,
+    thumbnail_media_type?: HTMLImageElement
+}
