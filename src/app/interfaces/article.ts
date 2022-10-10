@@ -5,7 +5,7 @@ export interface Article {
     category: string,
     abstract: string,
     body?: string,
-    update_date: Date,
+    update_date: string,
     image_data?: HTMLImageElement,
     image_media_type?: HTMLImageElement,
     thumbnail_image?: HTMLImageElement,
