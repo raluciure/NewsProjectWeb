@@ -1,0 +1,18 @@
+<div *ngIf="article" class="container mt-5">
+  <h2>{{article.title}}
+  </h2>
+  <h6 class="text-secondary">{{article.subtitle}}</h6>
+  <div>
+    <span class="badge bg-primary">{{article.category}}</span>
+  </div>
+  <hr />
+  <p class="fst-italic">
+    <strong>Abstract: </strong>
+    {{article.abstract}}
+  </p>
+  <img [src]="article.thumbnail_image"/>
+  <p [innerHTML]="article.body"></p>
+  <footer class="text-end">
+    <p class="fw-bolder">Modified at {{article.update_date}} by {{article.username}}</p>
+  </footer>
+</div>
