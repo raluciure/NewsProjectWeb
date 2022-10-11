@@ -9,5 +9,6 @@ export interface Article {
     image_data?: HTMLImageElement,
     image_media_type?: HTMLImageElement,
     thumbnail_image?: HTMLImageElement,
-    thumbnail_media_type?: HTMLImageElement
+    thumbnail_media_type?: HTMLImageElement,
+    username?: string
 }

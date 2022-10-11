@@ -4,6 +4,7 @@ import { Article } from '../interfaces/article';
 import { User } from '../interfaces/User';
 import { LoginService } from '../services/login.service';
 import { NewsService } from '../services/news.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-articles-list',
@@ -19,7 +20,10 @@ export class ArticlesListComponent implements OnInit {
   searchText: string;
   @ViewChild('loginForm') loginForm: any;
 
-  constructor(private loginService: LoginService, private newsService: NewsService) {
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private newsService: NewsService) {
     this.user = { id_user: "", username: "", password: "" };
     this.article = { id: "", title: "", category: "", abstract: "", update_date: "" };
     this.searchText = "";
@@ -95,6 +99,10 @@ export class ArticlesListComponent implements OnInit {
         this.articlesList = list;
       }
     )
+  }
+
+  toArticleDetail(id: number) {
+    this.router.navigate([`/articles/${id}`])
   }
 
   getArticle(id: number) {
