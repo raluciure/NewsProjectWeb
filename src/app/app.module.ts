@@ -8,11 +8,13 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
+import { CategoryPipe } from './pipes/category.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesListComponent,
+    CategoryPipe,
   ],
   imports: [
     BrowserModule,

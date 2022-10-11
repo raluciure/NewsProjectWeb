@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Article } from '../interfaces/article';
 import { User } from '../interfaces/User';
@@ -17,12 +18,14 @@ export class ArticlesListComponent implements OnInit {
   articlesList: Article[] = [];
   article: Article;
   searchText: string;
+  category: string;
   @ViewChild('loginForm') loginForm: any;
 
-  constructor(private loginService: LoginService, private newsService: NewsService) {
+  constructor(private loginService: LoginService, private newsService: NewsService, private route: ActivatedRoute) {
     this.user = { id_user: "", username: "", password: "" };
     this.article = { id: "", title: "", category: "", abstract: "", update_date: "" };
     this.searchText = "";
+    this.category = "";
   }
 
   ngOnInit(): void {
@@ -150,6 +153,10 @@ export class ArticlesListComponent implements OnInit {
         )
       }
     })
+  }
+
+  setCategory(category: string): void {
+    this.category = category;
   }
 
 
