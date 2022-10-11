@@ -9,12 +9,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
 import { CategoryPipe } from './pipes/category.pipe';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesListComponent,
     CategoryPipe,
+    ArticleDetailComponent,
   ],
   imports: [
     BrowserModule,

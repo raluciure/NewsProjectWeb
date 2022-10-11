@@ -82,8 +82,8 @@
     <div class="card-group">
         <div *ngFor="let article of articlesList | filter:searchText">
             <div class="card" style="width: 18rem;">
-                <img class="image1" [src]="'data:'+ article.thumbnail_media_type + ';base64,' 
-        + article.thumbnail_image" (click)="getArticle(article.id)">
+                <img class="image1" [src]="'data:'+ article.thumbnail_media_type + ';base64,'
+        + article.thumbnail_image" (click)="toArticleDetail(article.id)">
                 <div class="card-body">
                     <h5 class="card-title" (click)="getArticle(article.id)" >{{ article.title }}</h5>
                     <h6 class="card-text"> {{ article.subtitle }} </h6>
