@@ -12,6 +12,8 @@ import { CategoryPipe } from './pipes/category.pipe';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { LoginComponent } from './login/login.component';
+import { EditArticleComponent } from './edit-article/edit-article.component';
+import { CreateArticleComponent } from './create-article/create-article.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { LoginComponent } from './login/login.component';
     ArticleDetailComponent,
     NavigationBarComponent,
     LoginComponent,
+    EditArticleComponent,
+    CreateArticleComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,8 +32,8 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     Ng2SearchPipeModule,
     NgbModule,
-    FormsModule,                              
-    ReactiveFormsModule,    
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

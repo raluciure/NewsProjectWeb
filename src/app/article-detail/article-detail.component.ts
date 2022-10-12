@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {Article} from "../interfaces/article";
-import {NewsService} from "../services/news.service";
+import { ActivatedRoute } from "@angular/router";
+import { Article } from "../interfaces/article";
+import { NewsService } from "../services/news.service";
 
 @Component({
   selector: 'app-article-detail',
@@ -19,7 +19,6 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.getArticle(Number(article_id))
       .subscribe(article => {
         this.article = article;
-        console.log(article)
       })
   }
 

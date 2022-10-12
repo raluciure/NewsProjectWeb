@@ -5,7 +5,8 @@
                 aria-describedby="search-addon" [(ngModel)]="searchText" name="searchText" />
         </div>
         <div *ngIf="isLoggedIn()">
-            <button type="button" class="btn btn-primary" style="width: 200px; margin-left: 3px">Create new article</button>
+            <button type="button" class="btn btn-primary" style="width: 200px; margin-left: 3px"
+                (click)="createArticle()">Create new article</button>
         </div>
     </div>
     <div class="card-group">
@@ -18,7 +19,7 @@
                     <h6 class="card-text"> {{ article.subtitle }} </h6>
                     <p class="card-text">{{ article.abstract }}</p>
                     <div *ngIf="isLoggedIn()">
-                        <button type="button" class="btn btn-info" (click)="edit()">Edit</button>
+                        <button type="button" class="btn btn-info" (click)="editArticle(article.id)">Edit</button>
                         <button type="button" class="btn btn-danger" (click)="deleteArticle(article)">Remove</button>
                     </div>
                 </div>

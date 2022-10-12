@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { User } from '../interfaces/User';
 import { LoginService } from '../services/login.service';
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   user: User | null;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private router: Router) {
     this.user = { id_user: "", username: "", password: "" };
   }
   ngOnInit(): void {
@@ -63,6 +64,7 @@ export class LoginComponent implements OnInit {
         );
         this.loginService.logout();
         this.user = { id_user: "", username: "", password: "" }
+        this.router.navigate([`/articles`])
       } else if (
         result.dismiss === Swal.DismissReason.cancel
       ) {

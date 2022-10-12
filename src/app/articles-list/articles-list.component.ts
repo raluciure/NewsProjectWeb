@@ -34,8 +34,6 @@ export class ArticlesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const category = this.route.snapshot.paramMap.get("category");
-    console.log(category);
     this.getArticles();
   }
 
@@ -51,7 +49,7 @@ export class ArticlesListComponent implements OnInit {
         if (category != null)
           this.articlesList = list.filter(article => (article.category === category));
         else
-         this.articlesList = list
+          this.articlesList = list
       }
     )
   }
@@ -110,7 +108,11 @@ export class ArticlesListComponent implements OnInit {
     this.category = category;
   }
 
-  edit(): void {
-    console.log(this.searchText);
+  editArticle(id: Number): void {
+    this.router.navigate([`/article/edit/${id}`])
+  }
+
+  createArticle(): void {
+    this.router.navigate([`/article/create`])
   }
 }

@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
-import {ArticleDetailComponent} from "./article-detail/article-detail.component";
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { ArticleDetailComponent } from "./article-detail/article-detail.component";
+import { EditArticleComponent } from './edit-article/edit-article.component';
+import { CreateArticleComponent } from './create-article/create-article.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/articles', pathMatch: 'full' },
   { path: 'articles', component: ArticlesListComponent },
   { path: 'articles/:article_id', component: ArticleDetailComponent },
   { path: 'articles-list/:category', component: ArticlesListComponent },
+  { path: 'article/edit/:article_id', component: EditArticleComponent },
+  { path: 'article/create', component: CreateArticleComponent },
 ];
 
 @NgModule({
@@ -18,7 +21,7 @@ const routes: Routes = [
 export class AppRoutingModule {
   constructor(private router: Router) {
     this.router.errorHandler = (error: any) => {
-      this.router.navigate(['']); // when the URL does not match redirect to initial default route
+      this.router.navigate(['']); 
     }
   }
 }
