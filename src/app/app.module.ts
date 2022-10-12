@@ -12,7 +12,7 @@ import { CategoryPipe } from './pipes/category.pipe';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { LoginComponent } from './login/login.component';
-import { EditArticleComponent } from './edit-article/edit-article.component';
+import { ArticleEditionComponent } from './article-edition/article-edition.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { CreateArticleComponent } from './create-article/create-article.componen
     ArticleDetailComponent,
     NavigationBarComponent,
     LoginComponent,
-    EditArticleComponent,
+    ArticleEditionComponent,
     CreateArticleComponent,
   ],
   imports: [
