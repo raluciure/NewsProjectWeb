@@ -2,18 +2,17 @@ import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
 import {ArticleDetailComponent} from "./article-detail/article-detail.component";
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/articles-list', pathMatch: 'full' },
-  { path: 'articles-list', component: ArticlesListComponent },
-  {
-    path: 'articles/:article_id',
-    component: ArticleDetailComponent
-  }
+  { path: '', redirectTo: '/articles', pathMatch: 'full' },
+  { path: 'articles', component: ArticlesListComponent },
+  { path: 'articles/:article_id', component: ArticleDetailComponent },
+  { path: 'articles-list/:category', component: ArticlesListComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

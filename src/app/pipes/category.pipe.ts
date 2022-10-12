@@ -7,7 +7,7 @@ import { Article } from '../interfaces/article';
 export class CategoryPipe implements PipeTransform {
 
   transform(allArticles: Article[], category: string): Article[] {
-    if (category != "All")
+    if (category != "")
       return allArticles.filter(article => (article.category === category));
     else
       return allArticles;

@@ -1,26 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import Swal from 'sweetalert2';
-import { User } from './interfaces/User';
-import { LoginService } from './services/login.service';
+import { User } from '../interfaces/User';
+import { LoginService } from '../services/login.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class AppComponent {
-  title = 'EITWEbNews';
+export class LoginComponent implements OnInit {
 
   user: User | null;
-  searchText: string;
 
   constructor(private loginService: LoginService) {
     this.user = { id_user: "", username: "", password: "" };
-    this.searchText = "";
+  }
+  ngOnInit(): void {
   }
 
   isLoggedIn(): boolean {
-    console.log(this.loginService.isLogged())
     return this.loginService.isLogged();
   }
 
@@ -75,8 +73,5 @@ export class AppComponent {
         )
       }
     })
-
-
   }
-
 }

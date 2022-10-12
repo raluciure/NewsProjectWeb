@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
 import { CategoryPipe } from './pipes/category.pipe';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
     ArticlesListComponent,
     CategoryPipe,
     ArticleDetailComponent,
+    NavigationBarComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

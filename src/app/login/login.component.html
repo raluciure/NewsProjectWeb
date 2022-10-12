@@ -1,0 +1,46 @@
+<div class="row justify-content-between">
+    <div class="col-4">
+        <div class="container-fluid">
+            <a class="navbar-brands" href="articles">
+                <img src="assets\logo.jpeg" alt="" width="190" height="70" class="d-inline-block align-text-top">
+            </a>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoggedIn()" class="d-flex flex-row-reverse bd-highlight col-4">
+        <div class="p-2 bd-highlight">
+            <form id="forms" #loginForm="ngForm">
+                <div class="d-flex flex-row bd-highlight mb-3">
+                    <div class="p-2 bd-highlight">
+                        <input class="form-control" type="text" name="username" placeholder="Username"
+                            [(ngModel)]="user!.username" #username="ngModel">
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <input class="form-control" type="password" name="password" placeholder="Password"
+                            [(ngModel)]="user!.password" #password="ngModel">
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <button class="btn btn-outline-success" type="submit" [disabled]="!loginForm.form.valid"
+                            (click)="login()">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div *ngIf="isLoggedIn()" class="d-flex flex-row-reverse bd-highlight col-4">
+        <div class="p-2 bd-highlight">
+            <div class="d-flex flex-row bd-highlight mb-3">
+                <div class="p-2 bd-highlight">
+                    <div class="badge bg-primary text-wrap" style="margin-top: 10px;">
+                        Welcome {{user!.username}}!
+                    </div>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <button type="button" class="btn btn-outline-secondary" (click)="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

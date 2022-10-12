@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Article } from '../interfaces/article';
 import { User } from '../interfaces/User';
 import { LoginService } from '../services/login.service';
 import { NewsService } from '../services/news.service';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-articles-list',
@@ -18,12 +18,13 @@ export class ArticlesListComponent implements OnInit {
   isLogged: boolean = false;
   articlesList: Article[] = [];
   article: Article;
-  searchText: string;
   category: string;
+  searchText: string;
   @ViewChild('loginForm') loginForm: any;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private loginService: LoginService,
     private newsService: NewsService) {
     this.user = { id_user: "", username: "", password: "" };
@@ -33,88 +34,30 @@ export class ArticlesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const category = this.route.snapshot.paramMap.get("category");
+    console.log(category);
     this.getArticles();
   }
 
-  login() {
-    this.loginService.login(this.user!.username, this.user!.password).subscribe(
-      user => {
-        this.user = user
-        console.log(this.user);
-      },
-      err => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Wrong username or password!',
-        });
-      }
-    )
-  }
-
   isLoggedIn(): boolean {
-    console.log(this.loginService.isLogged())
     return this.loginService.isLogged();
   }
 
-  logout() {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
-    })
-
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure you want to log out?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire(
-          'Logged out!',
-          'You have logged out successfully!',
-          'success'
-        );
-        this.loginService.logout();
-        this.user = { id_user: "", username: "", password: "" }
-      } else if (
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'You have not logged out!',
-          'error'
-        )
-      }
-    })
-
-
-  }
-
   getArticles() {
+    const category = this.route.snapshot.paramMap.get("category");
+    console.log(category);
     this.newsService.getArticles().subscribe(
       list => {
-        this.articlesList = list;
+        if (category != null)
+          this.articlesList = list.filter(article => (article.category === category));
+        else
+         this.articlesList = list
       }
     )
   }
 
   toArticleDetail(id: number) {
     this.router.navigate([`/articles/${id}`])
-  }
-
-  getArticle(id: number) {
-    this.newsService.getArticle(id).subscribe(
-      article => {
-        this.article = article;
-        console.log("ARTICLE" + article.id);
-      }
-    )
   }
 
   deleteArticle(article: Article): void {
@@ -167,5 +110,7 @@ export class ArticlesListComponent implements OnInit {
     this.category = category;
   }
 
-
+  edit(): void {
+    console.log(this.searchText);
+  }
 }
