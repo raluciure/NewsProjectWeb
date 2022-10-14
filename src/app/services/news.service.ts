@@ -94,4 +94,10 @@ export class NewsService {
     console.log(article);
     return this.http.post<Article>(this.articleUrl, article, this.httpOptions);
   }
+
+  addArticle(article?: Article): Observable<Article> {
+    return this.http.post<Article>(this.articleUrl, article, this.httpOptions).pipe(
+      tap((newArticle: Article) => console.log(`added email with id=${newArticle.id}`)),
+    );
+  }
 }

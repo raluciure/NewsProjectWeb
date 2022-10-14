@@ -1,1 +1,60 @@
-<p>create-article works!</p>
+<h1>Email</h1>
+
+<form #articleForm="ngForm" (ngSubmit)="add()">
+    <div class="form-group">
+        <label>Title: </label>
+        <input appHighlight class="form-control" 
+        type="text" 
+        required 
+        [(ngModel)]="article.title" 
+        name="ntitle" 
+        #ntitle="ngModel"
+        [ngClass]="ntitle.valid || ntitle.pristine ? '': 'bg-danger'">
+
+        <div class="alert alert-danger" *ngIf="ntitle.touched && !ntitle.valid">
+            <div *ngIf="ntitle.errors?.['required']">Title is required.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Subtitle: </label>
+        <input appHighlight class="form-control" 
+        type="text" 
+        required 
+        [(ngModel)]="article.subtitle" 
+        name="nsubtitle" 
+        #nsubtitle="ngModel"
+        [ngClass]="nsubtitle.valid || nsubtitle.pristine ? '': 'bg-danger'">
+
+        <div class="alert alert-danger" *ngIf="nsubtitle.touched && !nsubtitle.valid">
+            <div *ngIf="nsubtitle.errors?.['required']">Subtitle is required.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Abstract: </label>
+        <input appHighlight
+        class="form-control" type="text" required
+        [(ngModel)]="article.abstract" 
+        name="nabstract" 
+        #nabstract="ngModel"
+            [ngClass]="nabstract.valid || nabstract.pristine ? '': 'bg-danger'">
+
+        <div class="alert alert-danger" *ngIf="nabstract.touched && !nabstract.valid">
+            <div *ngIf="nabstract.errors?.['required']">Abstract is required.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Body: </label>
+        <input appHighlight
+        class="form-control" type="text" 
+        [(ngModel)]="article.body" 
+        name="nbody" 
+        #nbody="ngModel"
+            [ngClass]="nbody.valid || nbody.pristine ? '': 'bg-danger'">
+    </div>
+
+    <button class="btn btn-primary btn-sm mr-1" type="submit" (click)="add()" [disabled]="!articleForm.form.valid">Send</button>
+    <button class="btn btn-primary btn-sm mr-1" type="button" (click)="reset()">Reset</button>
+
