@@ -17,7 +17,7 @@ export class ArticleEditionComponent implements OnInit {
   @ViewChild('articlesForm') articleForm: any;
 
   constructor(private article_service: NewsService, private route: ActivatedRoute, private location: Location, private router: Router) {
-    this.article = { id: 0, title: "", subtitle: "", abstract: "", body: "" };
+    this.article = { id: 0, title: "", subtitle: "", abstract: "", body: "",  category: ""};
   }
 
   ngOnInit(): void {
@@ -35,9 +35,9 @@ export class ArticleEditionComponent implements OnInit {
   }
 
   edit() {
-    let myarticle = { id: 0, title: this.article.title, subtitle: this.article.subtitle, abstract: this.article.abstract, body: this.article.body };
+    let myarticle = { id: 0, title: this.article.title, subtitle: this.article.subtitle, abstract: this.article.abstract, body: this.article.body,  category: this.article.category};
 
-    this.article_service.addArticle(myarticle).subscribe(
+    this.article_service.createArticle(myarticle).subscribe(
       _ => {
         this.message = 'Article added successfully';
       },

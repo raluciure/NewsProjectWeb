@@ -2,7 +2,7 @@ export interface Article {
     id: any,
     title: string,
     subtitle?: string,
-    category?: string,
+    category: string,
     abstract: string,
     body?: string,
     update_date?: string,
