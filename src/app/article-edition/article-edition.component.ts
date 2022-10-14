@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from '../interfaces/article';
 import { NewsService } from '../services/news.service';
 import { Location } from '@angular/common';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-article',
@@ -11,35 +12,31 @@ import { Location } from '@angular/common';
 })
 export class ArticleEditionComponent implements OnInit {
   article: Article;
-  article_id?: string | null;
   message?: string;
 
   @ViewChild('articlesForm') articleForm: any;
 
-  constructor(private article_service: NewsService, private route: ActivatedRoute, private location: Location, private router: Router) {
-    this.article = { id: 0, title: "", subtitle: "", abstract: "", body: "",  category: ""};
+  constructor(private article_service: NewsService, private route: ActivatedRoute, private location: Location, private router: ActivatedRoute) {
+    this.article = { id: 0, title: "", subtitle: "", abstract: "", body: "", category: "" };
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
-      params => {
-        // window.alert('The URL has been updated'); 
-        this.article_id = params.get('id');
-      }
-    )
-    this.getArticle(this.article_id);
+    const article_id = this.router.snapshot.paramMap.get("article_id");
+    this.article_service.getArticle(Number(article_id))
+      .subscribe(article => {
+        this.article = article;
+      })
   }
 
-  getArticle(id: any) {
-    this.article_service.getArticle(id).subscribe(article => this.article = article);
-  }
-
-  edit() {
-    let myarticle = { id: 0, title: this.article.title, subtitle: this.article.subtitle, abstract: this.article.abstract, body: this.article.body,  category: this.article.category};
-
-    this.article_service.createArticle(myarticle).subscribe(
+  edit(articleForm: NgForm, article: Article) {
+    article.title = articleForm.value.ntitle;
+    article.subtitle = articleForm.value.nsubtitle;
+    article.abstract = articleForm.value.nabstract;
+    article.body = articleForm.value.nbody;
+    console.log('Edited One is', article);
+    this.article_service.updateArticle(article).subscribe(
       _ => {
-        this.message = 'Article added successfully';
+        this.message = 'Article edited successfully';
       },
       err => {
         this.message = `An error has ocurred: ${err.statusText}`;

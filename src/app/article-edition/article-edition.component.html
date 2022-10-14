@@ -1,6 +1,6 @@
 <h1>Email</h1>
 
-<form #articleForm="ngForm" (ngSubmit)="edit()">
+<form #articleForm="ngForm" (ngSubmit)="edit(articleForm, article)">
     <div class="form-group">
         <label>Title: </label>
         <input appHighlight class="form-control" 
@@ -55,5 +55,4 @@
             [ngClass]="nbody.valid || nbody.pristine ? '': 'bg-danger'">
     </div>
 
-    <button class="btn btn-primary btn-sm mr-1" type="submit" (click)="edit()" [disabled]="!articleForm.form.valid">Save</button>
-
+    <button class="btn btn-primary btn-sm mr-1" type="submit" (click)="edit(articleForm, article)" [disabled]="!articleForm.form.valid">Save</button>
