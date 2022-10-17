@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import Swal from 'sweetalert2';
+import * as _ from 'lodash';  
 
 @Component({
   selector: 'app-edit-article',
@@ -17,6 +18,7 @@ export class ArticleEditionComponent implements OnInit {
   message?: string;
   cardImageBase64: any;
   isImageSaved: boolean = false;
+  imageError?: string;
 
   @ViewChild('articlesForm') articleForm: any;
 
@@ -29,6 +31,7 @@ export class ArticleEditionComponent implements OnInit {
     this.article_service.getArticle(Number(article_id))
       .subscribe(article => {
         this.article = article;
+        console.log(article);
       })
   }
 
@@ -63,23 +66,41 @@ export class ArticleEditionComponent implements OnInit {
   }
 
   fileChangeEvent(fileInput: any, article: Article) {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      const image = new Image();
-      image.src = e.target.result;
-      image.onload = _ => {
-        const imgBase64Path = e.target.result;
-        this.cardImageBase64 = imgBase64Path;
-        this.isImageSaved = true;
-        article.image_media_type = fileInput.target.files[0].type;
+    this.imageError = undefined;
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      // Size Filter Bytes
+      const MAX_SIZE = 20971520;
+      const ALLOWED_TYPES = ['image/png', 'image/jpeg'];
 
-        if (article.image_media_type != undefined) {
-          const head = article.image_media_type?.length + 13;
-          article.image_data = e.target.result.substring(head, e.target.result.length);
-        }
+      if (fileInput.target.files[0].size > MAX_SIZE) {
+        this.imageError =
+          'Maximum size allowed is ' + MAX_SIZE / 1000 + 'Mb';
+        window.alert(this.imageError);
+        return;
+      }
+      if (!_.includes(ALLOWED_TYPES, fileInput.target.files[0].type)) {
+        this.imageError = 'Only Images are allowed ( JPG | PNG )';
+        window.alert(this.imageError);
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const image = new Image();
+        image.src = e.target.result;
+        image.onload = _ => {
+          const imgBase64Path = e.target.result;
+          this.cardImageBase64 = imgBase64Path;
+          this.isImageSaved = true;
+          article.image_media_type = fileInput.target.files[0].type;
+
+          if (article.image_media_type != undefined) {
+            const head = article.image_media_type?.length + 13;
+            article.image_data = e.target.result.substring(head, e.target.result.length);
+          }
+        };
       };
-    };
-    reader.readAsDataURL(fileInput.target.files[0]);
+      reader.readAsDataURL(fileInput.target.files[0]);
+    }
   }
 
 
