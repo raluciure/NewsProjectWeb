@@ -8,13 +8,16 @@
     <hr />
     <img class="img-fluid" [src]="'data:'+ article.image_media_type + ';base64,'
         + article.image_data">
-    <p class="fst-italic">
-      <strong>Abstract: </strong>
-      {{article.abstract}}
-    </p>
-    <p [innerHTML]="article.body"></p>
-    <footer class="text-end">
-      <p class="fw-bolder">Modified at {{article.update_date}} by {{article.username}}</p>
-    </footer>
+    <div>
+      <div class="input-group">
+        <p class="fst-italic">
+          <strong>Abstract:</strong>
+        </p>
+        <p class="fst-italic ms-1" [innerHTML]="article.abstract"></p>
+      </div>
+      <p [innerHTML]="article.body"></p>
+      <footer class="text-end">
+        <p class="fw-bolder">Modified at {{article.update_date}} by {{article.username}}</p>
+      </footer>
+    </div>
   </div>
-</div>
