@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Article } from "../interfaces/article";
 import { NewsService } from "../services/news.service";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-article-detail',
@@ -12,7 +13,8 @@ export class ArticleDetailComponent implements OnInit {
   article: Article | undefined;
   constructor(
     private articleService: NewsService,
-    private router: ActivatedRoute) { }
+    private router: ActivatedRoute,
+    private location: Location) { }
 
   ngOnInit(): void {
     const article_id = this.router.snapshot.paramMap.get("article_id");
@@ -20,6 +22,10 @@ export class ArticleDetailComponent implements OnInit {
       .subscribe(article => {
         this.article = article;
       })
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

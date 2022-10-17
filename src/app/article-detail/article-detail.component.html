@@ -1,4 +1,5 @@
 <div class="overflow-auto">
+  <div class="bar rounded-pill mx-auto d-block"></div>
   <div *ngIf="article" class="container mt-5">
     <h2>{{article.title}}</h2>
     <h6 class="text-secondary">{{article.subtitle}}</h6>
@@ -16,6 +17,7 @@
         <p class="fst-italic ms-1" [innerHTML]="article.abstract"></p>
       </div>
       <p [innerHTML]="article.body"></p>
+      <button class="btn btn-secondary" type="submit" (click)="goBack()">Back</button>
       <footer class="text-end">
         <p class="fw-bolder">Modified at {{article.update_date}} by {{article.username}}</p>
       </footer>
