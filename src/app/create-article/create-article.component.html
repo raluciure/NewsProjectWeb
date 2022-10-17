@@ -1,4 +1,4 @@
-<h1>Email</h1>
+<h1>New Article</h1>
 
 <form #articleForm="ngForm" (ngSubmit)="add()">
     <div class="form-group">
@@ -55,6 +55,7 @@
             [ngClass]="nbody.valid || nbody.pristine ? '': 'bg-danger'">
     </div>
 
+    <button class="btn btn-primary btn-sm mr-1" type="submit" (click)="goBack()">Back</button>
     <button class="btn btn-primary btn-sm mr-1" type="submit" (click)="add()" [disabled]="!articleForm.form.valid">Send</button>
     <button class="btn btn-primary btn-sm mr-1" type="button" (click)="reset()">Reset</button>
 

@@ -16,7 +16,7 @@ export class CreateArticleComponent implements OnInit {
   message?: string;
 
 
-  @ViewChild('articlesForm') articleForm: any;
+  @ViewChild('articleForm') articleForm: any;
 
 
   constructor(private article_service: NewsService, private route: ActivatedRoute, private location: Location, private router: Router) { 
@@ -43,7 +43,7 @@ export class CreateArticleComponent implements OnInit {
       }
     );
     this.getArticlesList();
-    this.reset()
+    this.articleForm.reset()
     }
 
   reset(): void {
