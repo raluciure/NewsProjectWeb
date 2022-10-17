@@ -15,6 +15,8 @@ import Swal from 'sweetalert2';
 export class ArticleEditionComponent implements OnInit {
   article: Article;
   message?: string;
+  cardImageBase64: any;
+  isImageSaved: boolean = false;
 
   @ViewChild('articlesForm') articleForm: any;
 
@@ -52,13 +54,34 @@ export class ArticleEditionComponent implements OnInit {
           err => {
             this.message = `An error has ocurred: ${err.statusText}`;
           });
-          Swal.fire('Article edited successfully!', '', 'success');
+        Swal.fire('Article edited successfully!', '', 'success');
       }
       else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info')
       }
     });
   }
+
+  fileChangeEvent(fileInput: any, article: Article) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      const image = new Image();
+      image.src = e.target.result;
+      image.onload = _ => {
+        const imgBase64Path = e.target.result;
+        this.cardImageBase64 = imgBase64Path;
+        this.isImageSaved = true;
+        article.image_media_type = fileInput.target.files[0].type;
+
+        if (article.image_media_type != undefined) {
+          const head = article.image_media_type?.length + 13;
+          article.image_data = e.target.result.substring(head, e.target.result.length);
+        }
+      };
+    };
+    reader.readAsDataURL(fileInput.target.files[0]);
+  }
+
 
   setCategory(event: any, article: Article) {
     article.category = event.target.value;

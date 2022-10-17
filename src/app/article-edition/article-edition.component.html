@@ -1,50 +1,97 @@
-<form #articleForm="ngForm" (ngSubmit)="edit(articleForm, article)">
-    <div class="form-group">
-        <label>Title: </label>
-        <input appHighlight class="form-control" type="text" required [(ngModel)]="article.title" name="ntitle"
-            #ntitle="ngModel" [ngClass]="ntitle.valid || ntitle.pristine ? '': 'bg-danger'">
+<div class="row">
+    <div class="bar rounded-pill mx-auto d-block"></div>
+    <div class="col align-self-center" style="margin-left: 10px; margin-right: 10px;">
+        <h2 class="text-center">Edit article number {{article.id}}</h2>
+        <form #articleForm="ngForm" (ngSubmit)="edit(articleForm, article)">
+            <div class="form-group">
+                <label>Title * </label>
+                <input appHighlight class="form-control" type="text" required [(ngModel)]="article.title" name="ntitle"
+                    #ntitle="ngModel" [ngClass]="ntitle.valid || ntitle.pristine ? '': 'bg-danger'">
 
-        <div class="alert alert-danger" *ngIf="ntitle.touched && !ntitle.valid">
-            <div *ngIf="ntitle.errors?.['required']">Title is required.</div>
+                <div class="alert alert-danger" *ngIf="ntitle.touched && !ntitle.valid">
+                    <div *ngIf="ntitle.errors?.['required']">Title is required.</div>
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label>Subtitle * </label>
+                <input appHighlight class="form-control" type="text" required [(ngModel)]="article.subtitle"
+                    name="nsubtitle" #nsubtitle="ngModel"
+                    [ngClass]="nsubtitle.valid || nsubtitle.pristine ? '': 'bg-danger'">
+
+                <div class="alert alert-danger" *ngIf="nsubtitle.touched && !nsubtitle.valid">
+                    <div *ngIf="nsubtitle.errors?.['required']">Subtitle is required.</div>
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label>Abstract * </label>
+                <textarea appHighlight class="form-control" type="text" required [(ngModel)]="article.abstract"
+                    name="nabstract" #nabstract="ngModel"
+                    [ngClass]="nabstract.valid || nabstract.pristine ? '': 'bg-danger'" rows="2">
+                </textarea>
+
+                <div class="alert alert-danger" *ngIf="nabstract.touched && !nabstract.valid">
+                    <div *ngIf="nabstract.errors?.['required']">Abstract is required.</div>
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label>Body * </label>
+                <textarea appHighlight class="form-control" [(ngModel)]="article.body" name="nbody" #nbody="ngModel"
+                    [ngClass]="nbody.valid || nbody.pristine ? '': 'bg-danger'" rows="15">
+                </textarea>
+            </div>
+            <br>
+
+            <label>Category: </label>
+            <br>
+            <select (change)="setCategory($event,article)" class="form-select" aria-label="Default select example">
+                <option disabled>Choose a category</option>
+                <option value="National">National</option>
+                <option value="Economy">Economy</option>
+                <option value="Sports">Sports</option>
+                <option value="Technology">Technology</option>
+            </select>
+            <br>
+            <div class="form-group">
+                <label>Image:</label>
+                <br>
+                <input type="file" (change)="fileChangeEvent($event,article)" class="form-control-file" ngModel
+                    name="image_data">
+            </div>
+        </form>
+        <br>
+
+        <div class="col-md-12 text-center">
+            <button class="btn btn-primary" type="submit" (click)="edit(articleForm, article)"
+                [disabled]="!articleForm.form.valid || !isLoggedIn()" style="margin: 5px;">Save</button>
+            <button class="btn btn-secondary" type="submit" (click)="goBack()" style="margin: 5px;">Back</button>
+        </div>
+
+    </div>
+    <div class="col">
+        <div *ngIf="article">
+            <h4>{{article.title}}</h4>
+            <p class="text-secondary">{{article.subtitle}}</p>
+            <div>
+                <span class="badge bg-primary">{{article.category}}</span>
+            </div>
+            <br>
+            <img class="img-thumbnail rounded mx-auto d-block" style="width: 50%" [src]="'data:'+ article.image_media_type + ';base64,'
+                + article.image_data">
+
+            <p class="fst-italic">
+                <strong>Abstract:</strong>
+            </p>
+            <p class="fst-italic ms-1" [innerHTML]="article.abstract"></p>
+            <p [innerHTML]="article.body"></p>
+            <footer class="text-end">
+                <p class="fw-bolder">Modified at {{article.update_date}} by {{article.username}}</p>
+            </footer>
+
         </div>
     </div>
-
-    <div class="form-group">
-        <label>Subtitle: </label>
-        <input appHighlight class="form-control" type="text" required [(ngModel)]="article.subtitle" name="nsubtitle"
-            #nsubtitle="ngModel" [ngClass]="nsubtitle.valid || nsubtitle.pristine ? '': 'bg-danger'">
-
-        <div class="alert alert-danger" *ngIf="nsubtitle.touched && !nsubtitle.valid">
-            <div *ngIf="nsubtitle.errors?.['required']">Subtitle is required.</div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Abstract: </label>
-        <input appHighlight class="form-control" type="text" required [(ngModel)]="article.abstract" name="nabstract"
-            #nabstract="ngModel" [ngClass]="nabstract.valid || nabstract.pristine ? '': 'bg-danger'">
-
-        <div class="alert alert-danger" *ngIf="nabstract.touched && !nabstract.valid">
-            <div *ngIf="nabstract.errors?.['required']">Abstract is required.</div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Body: </label>
-        <textarea appHighlight class="form-control" [(ngModel)]="article.body" name="nbody" #nbody="ngModel"
-            [ngClass]="nbody.valid || nbody.pristine ? '': 'bg-danger'">
-        </textarea>
-    </div>
-
-    <label>Category: </label>
-    <br>
-    <select (change)="setCategory($event,article)" class="form-select" aria-label="Default select example">
-        <option>Choose a category</option>
-        <option value="National">National</option>
-        <option value="Economy">Economy</option>
-        <option value="Sports">Sports</option>
-        <option value="Technology">Technology</option>
-    </select>
-    <h6 class="fst-italic">The current category is {{article.category}}</h6>
-    <button class="btn btn-primary btn-sm mr-1" type="submit" (click)="edit(articleForm, article)"
-        [disabled]="!articleForm.form.valid || !isLoggedIn()">Save</button>
