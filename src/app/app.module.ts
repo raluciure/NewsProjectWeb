@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +14,6 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { LoginComponent } from './login/login.component';
 import { ArticleEditionComponent } from './article-edition/article-edition.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
-//import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -29,14 +28,15 @@ import { CreateArticleComponent } from './create-article/create-article.componen
   ],
   imports: [
     BrowserModule,
+    AngularEditorModule,
     AppRoutingModule,
     HttpClientModule,
     Ng2SearchPipeModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    //QuillModule.forRoot(),
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

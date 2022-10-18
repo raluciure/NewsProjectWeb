@@ -13,6 +13,7 @@ export class AppComponent {
 
   user: User | null;
   searchText: string;
+  
 
   constructor(private loginService: LoginService) {
     this.user = { id_user: "", username: "", password: "" };

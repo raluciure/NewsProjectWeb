@@ -7,6 +7,8 @@ import { NgForm } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import Swal from 'sweetalert2';
 import * as _ from 'lodash';  
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+
 
 @Component({
   selector: 'app-edit-article',
@@ -19,6 +21,38 @@ export class ArticleEditionComponent implements OnInit {
   cardImageBase64: any;
   isImageSaved: boolean = false;
   imageError?: string;
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+      ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ],
+    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top'
+  };
 
   @ViewChild('articlesForm') articleForm: any;
 

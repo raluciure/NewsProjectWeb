@@ -40,10 +40,9 @@
             <br>
 
             <div class="form-group">
-                <label>Body * </label>
-                <textarea appHighlight class="form-control" [(ngModel)]="article.body" name="nbody" #nbody="ngModel"
-                    [ngClass]="nbody.valid || nbody.pristine ? '': 'bg-danger'" rows="15">
-                </textarea>
+                <label>Body</label>
+                <angular-editor appHighlight class="form-control" [(ngModel)]="article.body" name="nbody" #nbody="ngModel"
+                [ngClass]="nbody.valid || nbody.pristine ? '': 'bg-danger'" rows="15">></angular-editor>
             </div>
             <br>
 
