@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 export class LoginService {
 
   private user: User | null;
-
+  private error?: string;
   private loginUrl = 'http://sanger.dia.fi.upm.es/pui-rest-news/login';
 
   private message: string | undefined;
@@ -38,7 +38,8 @@ export class LoginService {
       tap(user => {
         console.log(this.user)
         this.user = user;
-      })
+      }),
+      catchError(this.handleError<User>('login'))
     );
   }
 
@@ -54,13 +55,9 @@ export class LoginService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       this.user = null;
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
+      console.error(error);
       console.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
+      this.error = `${operation} failed: ${error.message}`;
       return of(result as T);
     };
   }
