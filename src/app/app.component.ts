@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { User } from './interfaces/User';
 import { LoginService } from './services/login.service';
+import { NewsService } from './services/news.service';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,8 @@ export class AppComponent {
   searchText: string;
   
 
-  constructor(private loginService: LoginService) {
-    this.user = { id_user: "", username: "", password: "" };
+  constructor(private loginService: LoginService, private newsService: NewsService) {
+    this.user = { id_user: "", username: "", password: "", apiKey: "" };
     this.searchText = "";
   }
 
@@ -28,7 +29,8 @@ export class AppComponent {
   login() {
     this.loginService.login(this.user!.username, this.user!.password).subscribe(
       user => {
-        this.user = user
+        this.user = user;
+        this.newsService.setUserApiKey(this.user.apiKey);
         console.log(this.user);
       },
       err => {
@@ -65,7 +67,9 @@ export class AppComponent {
           'success'
         );
         this.loginService.logout();
-        this.user = { id_user: "", username: "", password: "" }
+        this.user = { id_user: "", username: "", password: "", apiKey: "" };
+        this.newsService.setAnonymousApiKey();
+        console.log(this.user);
       } else if (
         result.dismiss === Swal.DismissReason.cancel
       ) {

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { User } from '../interfaces/User';
 import { LoginService } from '../services/login.service';
+import { NewsService } from '../services/news.service';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,8 @@ export class LoginComponent implements OnInit {
 
   user: User | null;
 
-  constructor(private loginService: LoginService, private router: Router) {
-    this.user = { id_user: "", username: "", password: "" };
+  constructor(private loginService: LoginService, private router: Router, private newsService: NewsService) {
+    this.user = { id_user: "", username: "", password: "", apiKey: "" };
   }
   ngOnInit(): void {
   }
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginService.login(this.user!.username, this.user!.password).subscribe(
       user => {
-        this.user = user
+        this.user = user;
         console.log(this.user);
       },
       err => {
@@ -63,8 +64,9 @@ export class LoginComponent implements OnInit {
           'success'
         );
         this.loginService.logout();
-        this.user = { id_user: "", username: "", password: "" }
-        this.router.navigate([`/articles`])
+        this.user = { id_user: "", username: "", password: "", apiKey: "" };
+        this.newsService.setAnonymousApiKey();
+        this.router.navigate([`/articles`]);
       } else if (
         result.dismiss === Swal.DismissReason.cancel
       ) {
