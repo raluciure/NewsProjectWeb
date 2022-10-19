@@ -6,6 +6,7 @@ import { User } from '../interfaces/User';
 import { LoginService } from '../services/login.service';
 import { NewsService } from '../services/news.service';
 import { Router } from "@angular/router";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-articles-list',
@@ -27,7 +28,7 @@ export class ArticlesListComponent implements OnInit {
     private route: ActivatedRoute,
     private loginService: LoginService,
     private newsService: NewsService) {
-    this.user = { id_user: "", username: "", password: "" };
+    this.user = { id_user: "", username: "", password: "", apiKey: "" };
     this.article = { id: "", title: "", category: "", abstract: "", update_date: "" };
     this.searchText = "";
     this.category = "";

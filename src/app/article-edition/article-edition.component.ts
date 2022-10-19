@@ -82,7 +82,6 @@ export class ArticleEditionComponent implements OnInit {
         article.subtitle = articleForm.value.nsubtitle;
         article.abstract = articleForm.value.nabstract;
         article.body = articleForm.value.nbody;
-        console.log('Edited One is', article);
         this.article_service.updateArticle(article).subscribe(
           _ => {
             this.message = 'Article edited successfully!';
@@ -136,7 +135,6 @@ export class ArticleEditionComponent implements OnInit {
       reader.readAsDataURL(fileInput.target.files[0]);
     }
   }
-
 
   setCategory(event: any, article: Article) {
     article.category = event.target.value;
