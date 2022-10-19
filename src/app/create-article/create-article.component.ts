@@ -3,8 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from '../interfaces/article';
 import { NewsService } from '../services/news.service';
 import { Location } from '@angular/common';
-import * as _ from 'lodash';  
+import * as _ from 'lodash';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -32,7 +35,7 @@ export class CreateArticleComponent implements OnInit {
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
       ['bold']
-      ],
+    ],
     customClasses: [
       {
         name: "quote",
@@ -57,8 +60,8 @@ export class CreateArticleComponent implements OnInit {
   @ViewChild('articleForm') articleForm: any;
 
 
-  constructor(private article_service: NewsService, private route: ActivatedRoute, private location: Location, private router: Router) {
-    this.article = { id: 0, title: "", subtitle: "", abstract: "", body: "", category: "" };
+  constructor(private article_service: NewsService, private loginService: LoginService, private route: ActivatedRoute, private location: Location, private router: Router) {
+    this.article = {} as Article;
   }
 
   ngOnInit(): void {
@@ -69,25 +72,25 @@ export class CreateArticleComponent implements OnInit {
     this.article_service.getArticles().subscribe(list => this.articlesList = list);
   }
 
-  add(): void {
-    let myarticle = { id: 0, title: this.article.title, subtitle: this.article.subtitle, abstract: this.article.abstract, body: this.article.body, category: this.article.category };
-
-    this.article_service.createArticle(myarticle).subscribe(
+  createArticle(articleForm: NgForm): void {
+    this.article.title = articleForm.value.ntitle;
+    this.article.subtitle = articleForm.value.nsubtitle;
+    this.article.abstract = articleForm.value.nabstract;
+    this.article.body = articleForm.value.nbody;
+    const article = this.article;
+    this.article_service.createArticle(article).subscribe(
       _ => {
-        this.message = 'Article added successfully';
+        Swal.fire('Article created successfully!', '', 'success');
+        this.redirectTo(`/articles`)
       },
       err => {
-        this.message = `An error has ocurred: ${err.statusText}`;
-      }
-    );
-    this.getArticlesList();
-    this.articleForm.reset()
+        Swal.fire('Error creating the article!', '', 'error');
+      });
   }
 
   fileChangeEvent(fileInput: any, article: Article) {
     this.imageError = undefined;
     if (fileInput.target.files && fileInput.target.files[0]) {
-      // Size Filter Bytes
       const MAX_SIZE = 20971520;
       const ALLOWED_TYPES = ['image/png', 'image/jpeg'];
 
@@ -133,5 +136,14 @@ export class CreateArticleComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri]));
+  }
+
+  isLoggedIn(): boolean {
+    return this.loginService.isLogged();
   }
 }

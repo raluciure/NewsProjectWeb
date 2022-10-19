@@ -1,8 +1,8 @@
 <div class="row">
     <div class="bar rounded-pill mx-auto d-block"></div>
     <div class="col align-self-center" style="margin-left: 10px; margin-right: 10px;">
-        <h2 class="text-center">Create article number {{article.id}}</h2>
-        <form #articleForm="ngForm" (ngSubmit)="articleForm">
+        <h2 class="text-center">Create new article</h2>
+        <form #articleForm="ngForm" (ngSubmit)="createArticle(articleForm)">
             <div class="form-group">
                 <label>Title * </label>
                 <input appHighlight class="form-control" type="text" required [(ngModel)]="article.title" name="ntitle"
@@ -50,25 +50,24 @@
             <br>
             <select (change)="setCategory($event,article)" class="form-select" aria-label="Default select example">
                 <option disabled>Choose a category</option>
-                <option value="National">National</option>
-                <option value="Economy">Economy</option>
-                <option value="Sports">Sports</option>
-                <option value="Technology">Technology</option>
+                <option value="National" [selected] = "(article.category == 'National')">National</option>
+                <option value="Economy" [selected] = "(article.category == 'Economy')">Economy</option>
+                <option value="Sports" [selected] = "article.category == 'Sports'">Sports</option>
+                <option value="Technology" [selected] = "article.category == 'Technology'">Technology</option>
             </select>
             <br>
             <div class="form-group">
                 <label>Image:</label>
                 <br>
-                <input type="file" (change)="fileChangeEvent($event,article)" class="form-control-file" ngModel
-                    name="image_data">
+                <input type="file" (change)="fileChangeEvent($event,article)" class="form-control-file" ngModel name="image_data">
             </div>
         </form>
         <br>
 
         <div class="col-md-12 text-center">
-            <button class="btn btn-primary" type="submit" (click)="add()"
-                [disabled]="!articleForm.form.valid" style="margin: 5px;">Save</button>
-            <button class="btn btn-secondary" type="submit" (click)="goBack()" style="margin: 5px;">Back</button>
+            <button class="btn btn-primary" type="submit" (click)="createArticle(articleForm)"
+                [disabled]="!articleForm.form.valid || !isLoggedIn()" style="margin: 5px;">Save</button>
+            <button class="btn btn-secondary" (click)="goBack()" style="margin: 5px;">Back</button>
         </div>
 
     </div>
