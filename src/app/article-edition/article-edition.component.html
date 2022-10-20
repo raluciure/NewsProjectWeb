@@ -41,8 +41,9 @@
 
             <div class="form-group">
                 <label>Body</label>
-                <angular-editor appHighlight class="form-control" [(ngModel)]="article.body" name="nbody" #nbody="ngModel"
-                [ngClass]="nbody.valid || nbody.pristine ? '': 'bg-danger'" rows="15">></angular-editor>
+                <angular-editor appHighlight class="form-control" [(ngModel)]="article.body" name="nbody"
+                    #nbody="ngModel" [ngClass]="nbody.valid || nbody.pristine ? '': 'bg-danger'" rows="15">>
+                </angular-editor>
             </div>
             <br>
 
@@ -50,10 +51,10 @@
             <br>
             <select (change)="setCategory($event,article)" class="form-select" aria-label="Default select example">
                 <option disabled>Choose a category</option>
-               <option value="National" [selected] = "(article.category == 'National')">National</option>
-                <option value="Economy" [selected] = "(article.category == 'Economy')">Economy</option>
-                <option value="Sports" [selected] = "article.category == 'Sports'">Sports</option>
-                <option value="Technology" [selected] = "article.category == 'Technology'">Technology</option>
+                <option value="National" [selected]="(article.category == 'National')">National</option>
+                <option value="Economy" [selected]="(article.category == 'Economy')">Economy</option>
+                <option value="Sports" [selected]="article.category == 'Sports'">Sports</option>
+                <option value="Technology" [selected]="article.category == 'Technology'">Technology</option>
             </select>
             <br>
             <div class="form-group">
@@ -80,8 +81,10 @@
                 <span class="badge bg-primary">{{article.category}}</span>
             </div>
             <br>
-            <img class="img-thumbnail rounded mx-auto d-block" style="width: 50%" [src]="'data:'+ article.image_media_type + ';base64,'
+            <div *ngIf="article.image_media_type!=null">
+                <img class="img-thumbnail rounded mx-auto d-block" style="width: 50%" [src]="'data:'+ article.image_media_type + ';base64,'
                 + article.image_data">
+            </div>
 
             <p class="fst-italic">
                 <strong>Abstract:</strong>

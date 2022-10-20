@@ -12,9 +12,16 @@
     <div class="card-group">
         <div *ngFor="let article of articlesList | filter:searchText | category:category">
             <div class="card text-center h-100" style="margin-right: 5px; width: 18rem; margin: 5px;">
-                <img class="card-img-top" [src]="'data:'+ article.thumbnail_media_type + ';base64,'
+                <div *ngIf="article.thumbnail_image!=null">
+                    <img class="card-img-top" [src]="'data:'+ article.thumbnail_media_type + ';base64,'
                     + article.thumbnail_image" (click)="toArticleDetail(article.id)" style="filter: brightness(50%); max-width: 100%;
                     max-height: 100%; ">
+                </div>
+                <div *ngIf="article.thumbnail_image==null">
+                    <img class="card-img-top" src="assets\no_image.jpg" (click)="toArticleDetail(article.id)"
+                        style="filter: brightness(50%); max-width: 100%;
+                            max-height: 100%; ">
+                </div>
                 <div class="card-img-overlay" (click)="toArticleDetail(article.id)">
                     <div class="d-flex" style="margin-bottom: 5px;">
                         <span class="badge"

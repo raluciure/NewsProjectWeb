@@ -7,8 +7,10 @@
       <span class="badge bg-primary">{{article.category}}</span>
     </div>
     <hr />
-    <img class="img-fluid" [src]="'data:'+ article.image_media_type + ';base64,'
+    <div *ngIf="article.image_media_type!=null">
+      <img class="img-fluid rounded mx-auto d-block" [src]="'data:'+ article.image_media_type + ';base64,'
         + article.image_data">
+    </div>
     <div>
       <div class="input-group">
         <p class="fst-italic">
