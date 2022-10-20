@@ -1,3 +1,28 @@
-.image1, .card-title {
+.img, .card-title, .card-img-overlay {
     cursor: pointer;
+    position:absolute;
 }
+
+.card-body {
+    cursor: auto;
+    position:relative;
+}
+
+.card:hover {
+    /* background-color: black;
+    color: white;
+    opacity: 70%; */
+    border: 1px solid rgb(135, 139, 140);
+    transform: scale(0.98);
+}
+
+.card-group {
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: row wrap; 
+    align-items: stretch;
+  }
+  .card-group .card {
+    display: block;
+    flex-basis: 33.3%; /* change this value for each breakpoint*/
+  }

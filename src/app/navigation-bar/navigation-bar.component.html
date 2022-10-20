@@ -1,5 +1,5 @@
 <div class="overflow-hidden">
-    <nav class="navbar navbar-expand-sm">
+    <nav class="navbar navbar-expand-sm" style="background-color: #321fa2; opacity: 80%;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -8,28 +8,28 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav nav-tabs me-auto mb-2 mb-lg-0">
-                    <li class="nav-item" [routerLinkActive]="['active']">
+                    <li class="nav-item" [routerLinkActive]="['active']" style="color:black;">
                         <!-- <a class="nav-link"><a routerLink="/articles">All</a></a> -->
-                        <a class="nav-link" [routerLink]="['articles']">All</a>
+                        <a class="nav-link" [routerLink]="['articles']" style="color:white;">All</a>
                     </li>
                     <li class="nav-item" [routerLinkActive]="['active']">
                         <!-- <a class="nav-link"><a routerLink="/articles-list/National" (click)="refresh('National')">National</a></a> -->
-                        <a class="nav-link" [routerLink]="['articles-list/National']" (click)="refresh('National')">
+                        <a class="nav-link" [routerLink]="['articles-list/National']" (click)="refresh('National')" style="color:white;">
                             National</a>
                     </li>
                     <li class="nav-item" [routerLinkActive]="['active']">
                         <!-- <a class="nav-link"><a routerLink="/articles-list/Economy" (click)="refresh('Economy')">Economy</a></a> -->
-                        <a class="nav-link" [routerLink]="['articles-list/Economy']" (click)="refresh('Economy')">
+                        <a class="nav-link" [routerLink]="['articles-list/Economy']" (click)="refresh('Economy')" style="color:white;">
                             Economy</a>
                     </li>
                     <li class="nav-item" [routerLinkActive]="['active']">
                         <!-- <a class="nav-link"><a routerLink="/articles-list/Sports" (click)="refresh('Sport')">Sports</a></a> -->
-                        <a class="nav-link" [routerLink]="['articles-list/Sports']" (click)="refresh('Sports')">
+                        <a class="nav-link" [routerLink]="['articles-list/Sports']" (click)="refresh('Sports')" style="color:white;">
                             Sports</a>
                     </li>
                     <li class="nav-item" [routerLinkActive]="['active']">
                         <!-- <a class="nav-link"><a routerLink="/articles-list/Technology" (click)="refresh('Technology')">Technology</a></a> -->
-                        <a class="nav-link" [routerLink]="['articles-list/Technology']" (click)="refresh('Technology')">
+                        <a class="nav-link" [routerLink]="['articles-list/Technology']" (click)="refresh('Technology')" style="color:white;">
                             Technology</a>
                     </li>
                 </ul>
