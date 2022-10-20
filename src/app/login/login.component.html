@@ -7,8 +7,8 @@
         </div>
     </div>
 
-    <div *ngIf="!isLoggedIn()" class="d-flex flex-row-reverse bd-highlight col-4">
-        <div class="p-2 bd-highlight">
+    <div *ngIf="!isLoggedIn()" class="d-flex flex-row-reverse bd-highlight col-4" style=" width:380px;">
+        <div class="p-2 bd-highlight" style="height: 75px;">
             <form id="forms" #loginForm="ngForm">
                 <div class="d-flex flex-row bd-highlight mb-3">
                     <div class="p-2 bd-highlight">
@@ -28,16 +28,16 @@
         </div>
     </div>
 
-    <div *ngIf="isLoggedIn()" class="d-flex flex-row-reverse bd-highlight col-4">
-        <div class="p-2 bd-highlight">
+    <div *ngIf="isLoggedIn()" class="d-flex flex-row-reverse bd-highlight col-4" style="width:350px;">
+        <div class="p-2 bd-highlight" style="height: 67px; margin-top: 8px;">
             <div class="d-flex flex-row bd-highlight mb-3">
                 <div class="p-2 bd-highlight">
-                    <div class="badge text-wrap" style="margin-top: 10px; background-color: #321fa2; ">
+                    <div class="badge text-wrap" style="background-color: #321fa2; ">
                         Welcome {{user!.username}}!
                     </div>
                 </div>
-                <div class="p-2 bd-highlight">
-                    <button type="button" class="btn btn-outline-secondary" (click)="logout()">Logout</button>
+                <div class="p-2 bd-highlight" (click)="logout()">
+                    <img class="icon" src="assets\logout-icon.svg">
                 </div>
             </div>
         </div>

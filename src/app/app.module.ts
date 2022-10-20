@@ -14,6 +14,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { LoginComponent } from './login/login.component';
 import { ArticleEditionComponent } from './article-edition/article-edition.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CreateArticleComponent } from './create-article/create-article.componen
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   
   providers: [],

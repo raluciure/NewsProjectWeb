@@ -9,26 +9,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav nav-tabs me-auto mb-2 mb-lg-0">
                     <li class="nav-item" [routerLinkActive]="['active']" style="color:black;">
-                        <!-- <a class="nav-link"><a routerLink="/articles">All</a></a> -->
                         <a class="nav-link" [routerLink]="['articles']" style="color:white;">All</a>
                     </li>
                     <li class="nav-item" [routerLinkActive]="['active']">
-                        <!-- <a class="nav-link"><a routerLink="/articles-list/National" (click)="refresh('National')">National</a></a> -->
                         <a class="nav-link" [routerLink]="['articles-list/National']" (click)="refresh('National')" style="color:white;">
                             National</a>
                     </li>
                     <li class="nav-item" [routerLinkActive]="['active']">
-                        <!-- <a class="nav-link"><a routerLink="/articles-list/Economy" (click)="refresh('Economy')">Economy</a></a> -->
                         <a class="nav-link" [routerLink]="['articles-list/Economy']" (click)="refresh('Economy')" style="color:white;">
                             Economy</a>
                     </li>
                     <li class="nav-item" [routerLinkActive]="['active']">
-                        <!-- <a class="nav-link"><a routerLink="/articles-list/Sports" (click)="refresh('Sport')">Sports</a></a> -->
                         <a class="nav-link" [routerLink]="['articles-list/Sports']" (click)="refresh('Sports')" style="color:white;">
                             Sports</a>
                     </li>
                     <li class="nav-item" [routerLinkActive]="['active']">
-                        <!-- <a class="nav-link"><a routerLink="/articles-list/Technology" (click)="refresh('Technology')">Technology</a></a> -->
                         <a class="nav-link" [routerLink]="['articles-list/Technology']" (click)="refresh('Technology')" style="color:white;">
                             Technology</a>
                     </li>

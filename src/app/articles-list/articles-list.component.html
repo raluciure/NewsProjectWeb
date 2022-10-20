@@ -1,11 +1,11 @@
-<div class="overflow-auto">
+<div class="overflow-hidden">
     <div class="d-flex" style="margin:5px;">
         <div class="input-group rounded">
             <input type="search" class="form-control rounded" placeholder="Search here..." aria-label="Search"
                 aria-describedby="search-addon" [(ngModel)]="searchText" name="searchText" />
         </div>
         <div *ngIf="isLoggedIn()">
-            <button type="button" class="btn btn-outline-primary" style="width: 200px; margin-left: 3px;"
+            <button type="button" class="edit" style=" margin-left: 3px;"
                 (click)="createArticle()">Create new article</button>
         </div>
     </div>
@@ -36,9 +36,9 @@
                     <h6 class="card-text"> {{ article.subtitle }} </h6>
                     <p class="card-text" [innerHTML]="article.abstract"></p>
                     <div *ngIf="isLoggedIn()" class="d-grid gap-2 mx-auto">
-                        <button type="button" class="btn btn-outline-info btn-sm"
+                        <button type="button" class="edit btn-sm"
                             (click)="editArticle(article.id)">Edit</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm"
+                        <button type="button" class="remove btn-sm"
                             (click)="deleteArticle(article)">Remove</button>
                     </div>
                 </div>
