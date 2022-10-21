@@ -13,10 +13,6 @@ export class NavigationBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isLoggedIn(): boolean {
-    return this.loginService.isLogged();
-  }
-
   redirectTo(uri: string) {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       this.router.navigate([uri]));

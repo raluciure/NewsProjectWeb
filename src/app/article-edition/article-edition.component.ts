@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import Swal from 'sweetalert2';
-import * as _ from 'lodash';  
+import * as _ from 'lodash';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 
@@ -21,6 +21,7 @@ export class ArticleEditionComponent implements OnInit {
   cardImageBase64: any;
   isImageSaved: boolean = false;
   imageError?: string;
+  id: any;
 
   config: AngularEditorConfig = {
     editable: true,
@@ -33,7 +34,7 @@ export class ArticleEditionComponent implements OnInit {
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
       ['bold']
-      ],
+    ],
     customClasses: [
       {
         name: "quote",
@@ -57,16 +58,25 @@ export class ArticleEditionComponent implements OnInit {
   @ViewChild('articlesForm') articleForm: any;
 
   constructor(private article_service: NewsService, private loginService: LoginService, private route: ActivatedRoute, private location: Location, private router: Router) {
-    this.article = { id: 0, title: "", subtitle: "", abstract: "", body: "", category: "" };
+    this.article = {} as Article;
+    const article_id = this.route.snapshot.paramMap.get("article_id");
+    if (article_id != null) {
+      this.id = Number(article_id);
+    }
+    else {
+      this.id = -1;
+    }
   }
 
   ngOnInit(): void {
     const article_id = this.route.snapshot.paramMap.get("article_id");
-    this.article_service.getArticle(Number(article_id))
-      .subscribe(article => {
-        this.article = article;
-        console.log(article);
-      })
+    if (this.id != -1) {
+      this.article_service.getArticle(Number(article_id))
+        .subscribe(article => {
+          this.article = article;
+          console.log(article);
+        })
+    }
   }
 
   edit(articleForm: NgForm, article: Article) {
@@ -155,6 +165,23 @@ export class ArticleEditionComponent implements OnInit {
   redirectTo(uri: string) {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       this.router.navigate([uri]));
+  }
+
+  createArticle(articleForm: NgForm): void {
+    this.article.title = articleForm.value.ntitle;
+    this.article.subtitle = articleForm.value.nsubtitle;
+    this.article.abstract = articleForm.value.nabstract;
+    this.article.body = articleForm.value.nbody;
+    this.article.category = articleForm.value.ncategory;
+    const article = this.article;
+    this.article_service.createArticle(article).subscribe(
+      _ => {
+        Swal.fire('Article created successfully!', '', 'success');
+        this.redirectTo(`/articles`)
+      },
+      err => {
+        Swal.fire('Error creating the article!', '', 'error');
+      });
   }
 
 }

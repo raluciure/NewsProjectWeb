@@ -23,7 +23,6 @@ export class ArticleDetailComponent implements OnInit {
         this.article = article;
         console.log(this.article);
       })
-      
   }
 
   goBack(): void {

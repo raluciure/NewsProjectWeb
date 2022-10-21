@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,7 +13,6 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { LoginComponent } from './login/login.component';
 import { ArticleEditionComponent } from './article-edition/article-edition.component';
-import { CreateArticleComponent } from './create-article/create-article.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
@@ -25,7 +24,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NavigationBarComponent,
     LoginComponent,
     ArticleEditionComponent,
-    CreateArticleComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +36,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     FontAwesomeModule,
   ],
-  
+
   providers: [],
   bootstrap: [AppComponent]
 })

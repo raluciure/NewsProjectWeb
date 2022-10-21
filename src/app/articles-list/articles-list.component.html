@@ -5,8 +5,8 @@
                 aria-describedby="search-addon" [(ngModel)]="searchText" name="searchText" />
         </div>
         <div *ngIf="isLoggedIn()">
-            <button type="button" class="edit" style=" margin-left: 3px;"
-                (click)="createArticle()">Create new article</button>
+            <button type="button" class="edit" style=" margin-left: 3px;" (click)="createArticle()">Create new
+                article</button>
         </div>
     </div>
     <div class="card-group">
@@ -18,8 +18,7 @@
                     max-height: 100%; ">
                 </div>
                 <div *ngIf="article.thumbnail_image==null">
-                    <img class="card-img-top" src="assets\no_image.jpg" (click)="toArticleDetail(article.id)"
-                        style="filter: brightness(50%); max-width: 100%;
+                    <img class="card-img-top" src="assets\no_image.jpg" (click)="toArticleDetail(article.id)" style="filter: brightness(50%); max-width: 100%;
                             max-height: 100%; ">
                 </div>
                 <div class="card-img-overlay" (click)="toArticleDetail(article.id)">
@@ -35,11 +34,9 @@
                 <div class="card-body">
                     <h6 class="card-text"> {{ article.subtitle }} </h6>
                     <p class="card-text" [innerHTML]="article.abstract"></p>
-                    <div *ngIf="isLoggedIn()" class="d-grid gap-2 mx-auto">
-                        <button type="button" class="edit btn-sm"
-                            (click)="editArticle(article.id)">Edit</button>
-                        <button type="button" class="remove btn-sm"
-                            (click)="deleteArticle(article)">Remove</button>
+                    <div *ngIf="isLoggedIn()" class="d-flex row gap-2 mx-auto">
+                        <button type="button" class="edit btn-sm" (click)="editArticle(article.id)">Edit</button>
+                        <button type="button" class="remove btn-sm" (click)="deleteArticle(article)">Remove</button>
                     </div>
                 </div>
             </div>

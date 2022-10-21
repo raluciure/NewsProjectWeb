@@ -14,7 +14,6 @@ export class AppComponent {
 
   user: User | null;
   searchText: string;
-  
 
   constructor(private loginService: LoginService, private newsService: NewsService) {
     this.user = { id_user: "", username: "", password: "", apiKey: "" };
@@ -33,12 +32,13 @@ export class AppComponent {
         this.newsService.setUserApiKey(this.user.apiKey);
         console.log(this.user);
       },
-      err => {
+      _ => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Wrong username or password!',
         });
+        this.user = { id_user: "", username: "", password: "", apiKey: "" }
       }
     )
   }
@@ -80,8 +80,6 @@ export class AppComponent {
         )
       }
     })
-
-
   }
 
 }

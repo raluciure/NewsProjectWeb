@@ -1,8 +1,13 @@
 <div class="row">
     <div class="bar rounded-pill mx-auto d-block"></div>
     <div class="col align-self-center" style="margin-left: 10px; margin-right: 10px;">
-        <h2 class="text-center">Edit article number {{article.id}}</h2>
-        <form #articleForm="ngForm" (ngSubmit)="edit(articleForm, article)">
+        <div *ngIf="id==-1">
+            <h2 class="text-center">Create new article</h2>
+        </div>
+        <div *ngIf="id!=-1">
+            <h2 class="text-center">Edit article number {{article.id}}</h2>
+        </div>
+        <form #articleForm="ngForm">
             <div class="form-group">
                 <label>Title * </label>
                 <input appHighlight class="form-control" type="text" required [(ngModel)]="article.title" name="ntitle"
@@ -47,15 +52,20 @@
             </div>
             <br>
 
-            <label>Category: </label>
+            <label>Category * </label>
             <br>
-            <select (change)="setCategory($event,article)" class="form-select" aria-label="Default select example">
+            <select (change)="setCategory($event,article)" class="form-select" aria-label="Category select"
+                [(ngModel)]="article.category" name="ncategory" required #ncategory="ngModel"
+                [ngClass]="ncategory.valid || ncategory.pristine ? '': 'bg-danger'">
                 <option disabled>Choose a category</option>
                 <option value="National" [selected]="(article.category == 'National')">National</option>
                 <option value="Economy" [selected]="(article.category == 'Economy')">Economy</option>
                 <option value="Sports" [selected]="article.category == 'Sports'">Sports</option>
                 <option value="Technology" [selected]="article.category == 'Technology'">Technology</option>
             </select>
+            <div class="alert alert-danger" *ngIf="ncategory.touched && !ncategory.valid">
+                <div *ngIf="ncategory.errors?.['required']">Category is required.</div>
+            </div>
             <br>
             <div class="form-group">
                 <label>Image:</label>
@@ -67,13 +77,21 @@
         <br>
 
         <div class="col-md-12 text-center">
-            <button class="btn btn-primary" type="submit" (click)="edit(articleForm, article)"
-                [disabled]="!articleForm.form.valid || !isLoggedIn()" style="margin: 5px;">Save</button>
-            <button class="btn btn-secondary" type="submit" (click)="goBack()" style="margin: 5px;">Back</button>
+            <div *ngIf="id==-1">
+                <button class="btn btn-primary" type="submit" (click)="createArticle(articleForm)"
+                    [disabled]="!articleForm.form.valid || !isLoggedIn()" style="margin: 5px;">Save</button>
+                <button class="btn btn-secondary" type="submit" (click)="goBack()" style="margin: 5px;">Back</button>
+            </div>
+            <div *ngIf="id!=-1">
+                <button class="btn btn-primary" type="submit" (click)="edit(articleForm, article)"
+                    [disabled]="!articleForm.form.valid || !isLoggedIn()" style="margin: 5px;">Save</button>
+                <button class="btn btn-secondary" type="submit" (click)="goBack()" style="margin: 5px;">Back</button>
+            </div>
+
         </div>
 
     </div>
-    <div class="col">
+    <div *ngIf="id!=-1" class="col">
         <div *ngIf="article">
             <h4>{{article.title}}</h4>
             <p class="text-secondary">{{article.subtitle}}</p>

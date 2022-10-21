@@ -28,15 +28,15 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.user!.username, this.user!.password).subscribe(
       user => {
         this.user = user;
-        //this.newsService.setUserApiKey(this.user.apiKey);
         console.log(this.user);
       },
-      err => {
+      _ => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Wrong username or password!',
         });
+        this.user = { id_user: "", username: "", password: "", apiKey: "" }
       }
     )
   }

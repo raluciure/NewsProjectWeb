@@ -25,25 +25,24 @@
 .card-group .card {
     display: block;
     flex-basis: 33.3%;
-    /* change this value for each breakpoint*/
 }
 
 .edit {
-    border: 1px solid; 
-    border-color:rgb(4, 76, 171);
-    color:rgb(4, 76, 171);
+    border: 1px solid;
+    border-color: rgb(4, 76, 171);
+    color: rgb(4, 76, 171);
     border-radius: 5px;
     background-color: white;
 }
 
 .edit:hover {
-    background-color:rgb(4, 76, 171);
+    background-color: rgb(4, 76, 171);
     color: white;
     border-radius: 5px;
 }
 
 .remove {
-    border: 1px solid; 
+    border: 1px solid;
     border-color: #900c0c;
     color: #900c0c;
     border-radius: 5px;
@@ -51,11 +50,7 @@
 }
 
 .remove:hover {
-    background-color: #900c0c;;
+    background-color: #900c0c;
     color: white;
     border-radius: 5px;
-}
-
-.buttons {
-    align-content: end;
 }

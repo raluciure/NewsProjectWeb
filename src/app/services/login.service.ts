@@ -3,6 +3,7 @@ import { User } from '../interfaces/User';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Article } from '../interfaces/article';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +37,8 @@ export class LoginService {
 
     return this.http.post<User>(this.loginUrl, usereq).pipe(
       tap(user => {
-        console.log(this.user)
         this.user = user;
-      }),
-      catchError(this.handleError<User>('login'))
+      })
     );
   }
 
