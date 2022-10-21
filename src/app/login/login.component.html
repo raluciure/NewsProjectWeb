@@ -12,15 +12,15 @@
             <form id="forms" #loginForm="ngForm">
                 <div class="d-flex flex-row bd-highlight mb-3">
                     <div class="p-2 bd-highlight">
-                        <input class="form-control" type="text" name="username" placeholder="Username"
+                        <input class="form-control" type="text" name="username" placeholder="Username" required
                             [(ngModel)]="user!.username" #username="ngModel">
                     </div>
                     <div class="p-2 bd-highlight">
-                        <input class="form-control" type="password" name="password" placeholder="Password"
+                        <input class="form-control" type="password" name="password" placeholder="Password" required
                             [(ngModel)]="user!.password" #password="ngModel">
                     </div>
                     <div class="p-2 bd-highlight">
-                        <button class="btn btn-outline-success" type="submit" [disabled]="!loginForm.form.valid"
+                        <button class="btn btn-success" type="submit" [disabled]="!loginForm.form.valid"
                             (click)="login()">Login</button>
                     </div>
                 </div>
