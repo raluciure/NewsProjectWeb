@@ -30,14 +30,14 @@
 
 .edit {
     border: 1px solid; 
-    border-color: #321fa2;
-    color: #321fa2;
+    border-color:rgb(4, 76, 171);
+    color:rgb(4, 76, 171);
     border-radius: 5px;
     background-color: white;
 }
 
 .edit:hover {
-    background-color: #321fa2;
+    background-color:rgb(4, 76, 171);
     color: white;
     border-radius: 5px;
 }
