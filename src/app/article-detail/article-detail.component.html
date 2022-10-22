@@ -7,7 +7,7 @@
       <span class="badge bg-primary">{{article.category}}</span>
     </div>
     <hr />
-    <div *ngIf="article.image_media_type!=null">
+    <div *ngIf="article.image_data!=null">
       <img class="img-fluid rounded mx-auto d-block" [src]="'data:'+ article.image_media_type + ';base64,'
         + article.image_data">
     </div>

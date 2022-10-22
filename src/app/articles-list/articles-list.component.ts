@@ -46,10 +46,14 @@ export class ArticlesListComponent implements OnInit {
     const category = this.route.snapshot.paramMap.get("category");
     this.newsService.getArticles().subscribe(
       list => {
-        if (category != null)
+        if (category != null) {
           this.articlesList = list.filter(article => (article.category === category));
-        else
+          console.log(this.articlesList);
+        }
+        else {
           this.articlesList = list
+          console.log(this.articlesList);
+        }
       }
     )
   }

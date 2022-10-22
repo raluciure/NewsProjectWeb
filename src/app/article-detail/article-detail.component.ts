@@ -21,7 +21,6 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.getArticle(Number(article_id))
       .subscribe(article => {
         this.article = article;
-        console.log(this.article);
       })
   }
 

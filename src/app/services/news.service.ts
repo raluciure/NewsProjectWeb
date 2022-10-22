@@ -96,8 +96,7 @@ export class NewsService {
   updateArticle(article: Article): Observable<Article> {
     console.log('Updating article id=' + article.id);
     return this.http.post<Article>(this.articleUrl, article, this.httpOptions).pipe(
-      tap((updatedArticle: Article) => console.log(`updated article with id=${updatedArticle.id}`)),
-      catchError(this.handleError<Article>('update article'))
+      tap((updatedArticle: Article) => console.log(`updated article with id=${updatedArticle.id}`))
     );
   }
 

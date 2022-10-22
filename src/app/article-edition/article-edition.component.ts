@@ -17,6 +17,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 })
 export class ArticleEditionComponent implements OnInit {
   article: Article;
+  articlesList: Article[] = [];
   message?: string;
   cardImageBase64: any;
   isImageSaved: boolean = false;
@@ -75,8 +76,9 @@ export class ArticleEditionComponent implements OnInit {
         .subscribe(article => {
           this.article = article;
           console.log(article);
-        })
+        });
     }
+    this.getArticlesList();
   }
 
   edit(articleForm: NgForm, article: Article) {
@@ -99,6 +101,7 @@ export class ArticleEditionComponent implements OnInit {
           },
           err => {
             this.message = `An error has ocurred: ${err.statusText}`;
+            this.redirectTo(`/articles`)
           });
         Swal.fire('Article edited successfully!', '', 'success');
       }
@@ -111,7 +114,6 @@ export class ArticleEditionComponent implements OnInit {
   fileChangeEvent(fileInput: any, article: Article) {
     this.imageError = undefined;
     if (fileInput.target.files && fileInput.target.files[0]) {
-      // Size Filter Bytes
       const MAX_SIZE = 20971520;
       const ALLOWED_TYPES = ['image/png', 'image/jpeg'];
 
@@ -177,11 +179,15 @@ export class ArticleEditionComponent implements OnInit {
     this.article_service.createArticle(article).subscribe(
       _ => {
         Swal.fire('Article created successfully!', '', 'success');
-        this.redirectTo(`/articles`)
+        this.redirectTo(`/articles`);
       },
       err => {
         Swal.fire('Error creating the article!', '', 'error');
       });
+  }
+
+  getArticlesList() {
+    this.article_service.getArticles().subscribe(list => this.articlesList = list);
   }
 
 }
